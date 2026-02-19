@@ -43,8 +43,7 @@
         "{projectRoot}/artifacts/js/localization",
         "{projectRoot}/js/__internal/core/localization/default_messages.ts",
         "{projectRoot}/js/__internal/core/localization/cldr-data"
-      ],
-      "cache": true
+      ]
     },
     "build:localization:headers": {
       "executor": "devextreme-nx-infra-plugin:add-license-headers",
@@ -54,7 +53,9 @@
         "eulaUrl": "https://js.devexpress.com/Licensing/",
         "prependAfterLicense": "\"use strict\";\n\n",
         "separatorBetweenBannerAndContent": "",
-        "includePatterns": ["**/*.js"]
+        "includePatterns": [
+          "**/*.js"
+        ]
       },
       "inputs": [
         "{projectRoot}/artifacts/js/localization/**/*.js",
@@ -62,8 +63,7 @@
       ],
       "outputs": [
         "{projectRoot}/artifacts/js/localization"
-      ],
-      "cache": true
+      ]
     },
     "build:localization": {
       "executor": "nx:run-commands",
@@ -85,8 +85,7 @@
         "{projectRoot}/artifacts/js/localization",
         "{projectRoot}/js/__internal/core/localization/default_messages.ts",
         "{projectRoot}/js/__internal/core/localization/cldr-data"
-      ],
-      "cache": true
+      ]
     },
     "build:devextreme-bundler-config:generate": {
       "executor": "devextreme-nx-infra-plugin:concatenate-files",
@@ -108,19 +107,34 @@
             "find": "require *\\( *[\"']..\\/\\.\\.\\/",
             "replace": "require('"
           },
-          { "find": "^[ ]{4}", "replace": "", "flags": "gm" },
-          { "find": "\\n{3,}", "replace": "\n\n", "flags": "g" }
+          {
+            "find": "^[ ]{4}",
+            "replace": "",
+            "flags": "gm"
+          },
+          {
+            "find": "\\n{3,}",
+            "replace": "\n\n",
+            "flags": "g"
+          }
         ]
       },
-      "inputs": ["{projectRoot}/build/bundle-templates/modules/parts/**/*.js"],
-      "outputs": ["{projectRoot}/build/bundle-templates/dx.custom.js"],
-      "cache": true
+      "inputs": [
+        "{projectRoot}/build/bundle-templates/modules/parts/**/*.js"
+      ],
+      "outputs": [
+        "{projectRoot}/build/bundle-templates/dx.custom.js"
+      ]
     },
     "build:devextreme-bundler-config:prod": {
-      "dependsOn": ["build:devextreme-bundler-config:generate"],
+      "dependsOn": [
+        "build:devextreme-bundler-config:generate"
+      ],
       "executor": "devextreme-nx-infra-plugin:concatenate-files",
       "options": {
-        "sourceFiles": ["./build/bundle-templates/dx.custom.js"],
+        "sourceFiles": [
+          "./build/bundle-templates/dx.custom.js"
+        ],
         "outputFile": "./artifacts/npm/devextreme/bundles/dx.custom.config.js",
         "transforms": [
           {
@@ -129,11 +143,12 @@
           }
         ]
       },
-      "inputs": ["{projectRoot}/build/bundle-templates/dx.custom.js"],
+      "inputs": [
+        "{projectRoot}/build/bundle-templates/dx.custom.js"
+      ],
       "outputs": [
         "{projectRoot}/artifacts/npm/devextreme/bundles/dx.custom.config.js"
       ],
-      "cache": true,
       "configurations": {
         "internal": {
           "outputFile": "./artifacts/npm/devextreme-internal/bundles/dx.custom.config.js",
@@ -160,8 +175,9 @@
         "!{projectRoot}/js/__internal/**/__tests__/**/*",
         "{projectRoot}/js/__internal/tsconfig.json"
       ],
-      "outputs": ["{projectRoot}/artifacts/dist_ts"],
-      "cache": true
+      "outputs": [
+        "{projectRoot}/artifacts/dist_ts"
+      ]
     },
     "build:cjs": {
       "executor": "devextreme-nx-infra-plugin:babel-transform",
@@ -169,7 +185,10 @@
         "babelConfigPath": "./build/gulp/transpile-config.js",
         "configKey": "cjs",
         "sourcePattern": "./js/**/*.{js,jsx}",
-        "excludePatterns": ["./js/**/*.d.ts", "./js/__internal/**/*"],
+        "excludePatterns": [
+          "./js/**/*.d.ts",
+          "./js/__internal/**/*"
+        ],
         "outDir": "./artifacts/transpiled"
       },
       "configurations": {
@@ -183,46 +202,83 @@
         "!{projectRoot}/js/**/*.d.ts",
         "!{projectRoot}/js/__internal/**/*"
       ],
-      "outputs": ["{projectRoot}/artifacts/transpiled"],
-      "cache": true
+      "outputs": [
+        "{projectRoot}/artifacts/transpiled"
+      ]
     },
     "copy:json:transpiled": {
       "executor": "devextreme-nx-infra-plugin:copy-files",
       "options": {
         "files": [
-          { "from": "./js/localization/messages", "to": "./artifacts/transpiled/localization/messages" },
-          { "from": "./js/viz/vector_map.utils/_settings.json", "to": "./artifacts/transpiled/viz/vector_map.utils/_settings.json" }
+          {
+            "from": "./js/localization/messages",
+            "to": "./artifacts/transpiled/localization/messages"
+          },
+          {
+            "from": "./js/viz/vector_map.utils/_settings.json",
+            "to": "./artifacts/transpiled/viz/vector_map.utils/_settings.json"
+          }
         ]
       },
-      "inputs": ["{projectRoot}/js/**/*.json", "!{projectRoot}/js/__internal/**/*"],
-      "outputs": ["{projectRoot}/artifacts/transpiled/**/*.json"],
-      "cache": true
+      "inputs": [
+        "{projectRoot}/js/**/*.json",
+        "!{projectRoot}/js/__internal/**/*"
+      ],
+      "outputs": [
+        "{projectRoot}/artifacts/transpiled/**/*.json"
+      ]
     },
     "copy:json:transpiled-production": {
       "executor": "devextreme-nx-infra-plugin:copy-files",
       "options": {
         "files": [
-          { "from": "./js/localization/messages", "to": "./artifacts/transpiled-renovation-npm/localization/messages" },
-          { "from": "./js/viz/vector_map.utils/_settings.json", "to": "./artifacts/transpiled-renovation-npm/viz/vector_map.utils/_settings.json" }
+          {
+            "from": "./js/localization/messages",
+            "to": "./artifacts/transpiled-renovation-npm/localization/messages"
+          },
+          {
+            "from": "./js/viz/vector_map.utils/_settings.json",
+            "to": "./artifacts/transpiled-renovation-npm/viz/vector_map.utils/_settings.json"
+          }
         ]
       },
-      "inputs": ["{projectRoot}/js/**/*.json", "!{projectRoot}/js/__internal/**/*"],
-      "outputs": ["{projectRoot}/artifacts/transpiled-renovation-npm/**/*.json"],
-      "cache": true
+      "inputs": [
+        "{projectRoot}/js/**/*.json",
+        "!{projectRoot}/js/__internal/**/*"
+      ],
+      "outputs": [
+        "{projectRoot}/artifacts/transpiled-renovation-npm/**/*.json"
+      ]
     },
     "copy:json:esm-npm": {
       "executor": "devextreme-nx-infra-plugin:copy-files",
       "options": {
         "files": [
-          { "from": "./js/localization/messages", "to": "./artifacts/transpiled-esm-npm/esm/localization/messages" },
-          { "from": "./js/viz/vector_map.utils/_settings.json", "to": "./artifacts/transpiled-esm-npm/esm/viz/vector_map.utils/_settings.json" },
-          { "from": "./js/localization/messages", "to": "./artifacts/transpiled-esm-npm/cjs/localization/messages" },
-          { "from": "./js/viz/vector_map.utils/_settings.json", "to": "./artifacts/transpiled-esm-npm/cjs/viz/vector_map.utils/_settings.json" }
+          {
+            "from": "./js/localization/messages",
+            "to": "./artifacts/transpiled-esm-npm/esm/localization/messages"
+          },
+          {
+            "from": "./js/viz/vector_map.utils/_settings.json",
+            "to": "./artifacts/transpiled-esm-npm/esm/viz/vector_map.utils/_settings.json"
+          },
+          {
+            "from": "./js/localization/messages",
+            "to": "./artifacts/transpiled-esm-npm/cjs/localization/messages"
+          },
+          {
+            "from": "./js/viz/vector_map.utils/_settings.json",
+            "to": "./artifacts/transpiled-esm-npm/cjs/viz/vector_map.utils/_settings.json"
+          }
         ]
       },
-      "inputs": ["{projectRoot}/js/**/*.json", "!{projectRoot}/js/__internal/**/*"],
-      "outputs": ["{projectRoot}/artifacts/transpiled-esm-npm/**/*.json"],
-      "cache": true
+      "inputs": [
+        "{projectRoot}/js/**/*.json",
+        "!{projectRoot}/js/__internal/**/*"
+      ],
+      "outputs": [
+        "{projectRoot}/artifacts/transpiled-esm-npm/**/*.json"
+      ]
     },
     "build:npm:esm": {
       "executor": "devextreme-nx-infra-plugin:babel-transform",
@@ -230,7 +286,10 @@
         "babelConfigPath": "./build/gulp/transpile-config.js",
         "configKey": "esm",
         "sourcePattern": "./js/**/*.{js,jsx}",
-        "excludePatterns": ["./js/**/*.d.ts", "./js/__internal/**/*"],
+        "excludePatterns": [
+          "./js/**/*.d.ts",
+          "./js/__internal/**/*"
+        ],
         "outDir": "./artifacts/transpiled-esm-npm/esm",
         "removeDebug": true
       },
@@ -239,8 +298,9 @@
         "!{projectRoot}/js/**/*.d.ts",
         "!{projectRoot}/js/__internal/**/*"
       ],
-      "outputs": ["{projectRoot}/artifacts/transpiled-esm-npm/esm"],
-      "cache": true
+      "outputs": [
+        "{projectRoot}/artifacts/transpiled-esm-npm/esm"
+      ]
     },
     "build:npm:cjs": {
       "executor": "devextreme-nx-infra-plugin:babel-transform",
@@ -248,7 +308,10 @@
         "babelConfigPath": "./build/gulp/transpile-config.js",
         "configKey": "cjs",
         "sourcePattern": "./js/**/*.{js,jsx}",
-        "excludePatterns": ["./js/**/*.d.ts", "./js/__internal/**/*"],
+        "excludePatterns": [
+          "./js/**/*.d.ts",
+          "./js/__internal/**/*"
+        ],
         "outDir": "./artifacts/transpiled-esm-npm/cjs",
         "removeDebug": true
       },
@@ -257,8 +320,9 @@
         "!{projectRoot}/js/**/*.d.ts",
         "!{projectRoot}/js/__internal/**/*"
       ],
-      "outputs": ["{projectRoot}/artifacts/transpiled-esm-npm/cjs"],
-      "cache": true
+      "outputs": [
+        "{projectRoot}/artifacts/transpiled-esm-npm/cjs"
+      ]
     },
     "build:cjs:internal": {
       "executor": "devextreme-nx-infra-plugin:babel-transform",
@@ -267,7 +331,9 @@
         "configKey": "tsCjs",
         "sourcePattern": "./artifacts/dist_ts/__internal/**/*.{js,jsx}",
         "outDir": "./artifacts/transpiled/__internal",
-        "renameExtensions": { ".jsx": ".js" }
+        "renameExtensions": {
+          ".jsx": ".js"
+        }
       },
       "configurations": {
         "production": {
@@ -275,9 +341,12 @@
           "removeDebug": true
         }
       },
-      "inputs": ["{projectRoot}/artifacts/dist_ts/__internal/**/*.{js,jsx}"],
-      "outputs": ["{projectRoot}/artifacts/transpiled/__internal"],
-      "cache": true
+      "inputs": [
+        "{projectRoot}/artifacts/dist_ts/__internal/**/*.{js,jsx}"
+      ],
+      "outputs": [
+        "{projectRoot}/artifacts/transpiled/__internal"
+      ]
     },
     "build:npm:esm:internal": {
       "executor": "devextreme-nx-infra-plugin:babel-transform",
@@ -287,11 +356,16 @@
         "sourcePattern": "./artifacts/dist_ts/__internal/**/*.{js,jsx}",
         "outDir": "./artifacts/transpiled-esm-npm/esm/__internal",
         "removeDebug": true,
-        "renameExtensions": { ".jsx": ".js" }
+        "renameExtensions": {
+          ".jsx": ".js"
+        }
       },
-      "inputs": ["{projectRoot}/artifacts/dist_ts/__internal/**/*.{js,jsx}"],
-      "outputs": ["{projectRoot}/artifacts/transpiled-esm-npm/esm/__internal"],
-      "cache": true
+      "inputs": [
+        "{projectRoot}/artifacts/dist_ts/__internal/**/*.{js,jsx}"
+      ],
+      "outputs": [
+        "{projectRoot}/artifacts/transpiled-esm-npm/esm/__internal"
+      ]
     },
     "build:npm:cjs:internal": {
       "executor": "devextreme-nx-infra-plugin:babel-transform",
@@ -301,11 +375,16 @@
         "sourcePattern": "./artifacts/dist_ts/__internal/**/*.{js,jsx}",
         "outDir": "./artifacts/transpiled-esm-npm/cjs/__internal",
         "removeDebug": true,
-        "renameExtensions": { ".jsx": ".js" }
+        "renameExtensions": {
+          ".jsx": ".js"
+        }
       },
-      "inputs": ["{projectRoot}/artifacts/dist_ts/__internal/**/*.{js,jsx}"],
-      "outputs": ["{projectRoot}/artifacts/transpiled-esm-npm/cjs/__internal"],
-      "cache": true
+      "inputs": [
+        "{projectRoot}/artifacts/dist_ts/__internal/**/*.{js,jsx}"
+      ],
+      "outputs": [
+        "{projectRoot}/artifacts/transpiled-esm-npm/cjs/__internal"
+      ]
     },
     "build:cjs:bundles": {
       "executor": "devextreme-nx-infra-plugin:babel-transform",
@@ -324,9 +403,12 @@
           "outDir": "./artifacts/transpiled-esm-npm/bundles"
         }
       },
-      "inputs": ["{projectRoot}/build/bundle-templates/**/*.js"],
-      "outputs": ["{projectRoot}/artifacts/transpiled/bundles"],
-      "cache": true
+      "inputs": [
+        "{projectRoot}/build/bundle-templates/**/*.js"
+      ],
+      "outputs": [
+        "{projectRoot}/artifacts/transpiled/bundles"
+      ]
     },
     "build:npm:dual-mode": {
       "executor": "nx:run-commands",
@@ -341,8 +423,7 @@
       ],
       "outputs": [
         "{projectRoot}/artifacts/transpiled-esm-npm/**/package.json"
-      ],
-      "cache": true
+      ]
     },
     "build:transpile": {
       "executor": "nx:run-commands",
@@ -376,7 +457,6 @@
         "{projectRoot}/build/bundle-templates/dx.custom.js",
         "{projectRoot}/artifacts/npm/devextreme/bundles/dx.custom.config.js"
       ],
-      "cache": true,
       "configurations": {
         "ci": {
           "commands": [
@@ -429,7 +509,9 @@
         "cwd": "{projectRoot}"
       },
       "inputs": [
-        { "env": "BUILD_TEST_INTERNAL_PACKAGE" },
+        {
+          "env": "BUILD_TEST_INTERNAL_PACKAGE"
+        },
         "{projectRoot}/artifacts/transpiled/**/*",
         "{projectRoot}/artifacts/transpiled-esm/**/*",
         "{projectRoot}/build/gulp/js-bundles.js",
@@ -438,8 +520,7 @@
       "outputs": [
         "{projectRoot}/artifacts/js/dx.all.debug.js",
         "{projectRoot}/artifacts/js/dx.all.debug.js.map"
-      ],
-      "cache": true
+      ]
     },
     "bundle:prod": {
       "executor": "nx:run-commands",
@@ -448,7 +529,9 @@
         "cwd": "{projectRoot}"
       },
       "inputs": [
-        { "env": "BUILD_TEST_INTERNAL_PACKAGE" },
+        {
+          "env": "BUILD_TEST_INTERNAL_PACKAGE"
+        },
         "{projectRoot}/artifacts/transpiled/**/*",
         "{projectRoot}/artifacts/transpiled-esm/**/*",
         "{projectRoot}/build/gulp/js-bundles.js",
@@ -457,8 +540,7 @@
       "outputs": [
         "{projectRoot}/artifacts/js/dx.all.js",
         "{projectRoot}/artifacts/js/dx.all.js.map"
-      ],
-      "cache": true
+      ]
     },
     "build:vectormap": {
       "executor": "nx:run-commands",
@@ -471,8 +553,7 @@
       ],
       "outputs": [
         "{projectRoot}/artifacts/js/vectormap-data"
-      ],
-      "cache": true
+      ]
     },
     "build:aspnet": {
       "executor": "nx:run-commands",
@@ -485,8 +566,7 @@
       ],
       "outputs": [
         "{projectRoot}/artifacts/js/aspnet"
-      ],
-      "cache": true
+      ]
     },
     "build:declarations": {
       "executor": "nx:run-commands",
@@ -500,16 +580,14 @@
       ],
       "outputs": [
         "{projectRoot}/artifacts/ts"
-      ],
-      "cache": true
+      ]
     },
     "verify:licenses": {
       "executor": "nx:run-commands",
       "options": {
         "command": "gulp check-license-notices",
         "cwd": "{projectRoot}"
-      },
-      "cache": false
+      }
     },
     "copy:vendor": {
       "executor": "nx:run-commands",
@@ -523,8 +601,7 @@
       "outputs": [
         "{projectRoot}/artifacts/js/vectormap-utils",
         "{projectRoot}/artifacts/js/cldr"
-      ],
-      "cache": true
+      ]
     },
     "pack:devextreme-npm": {
       "executor": "nx:run-commands",
@@ -547,15 +624,16 @@
         "cwd": "{projectRoot}"
       },
       "inputs": [
-        { "env": "BUILD_TEST_INTERNAL_PACKAGE" },
+        {
+          "env": "BUILD_TEST_INTERNAL_PACKAGE"
+        },
         "{projectRoot}/artifacts/transpiled/**/*",
         "{projectRoot}/artifacts/transpiled-esm-npm/**/*"
       ],
       "outputs": [
         "{projectRoot}/artifacts/npm/devextreme",
         "{projectRoot}/artifacts/npm/devextreme-dist"
-      ],
-      "cache": true
+      ]
     },
     "build": {
       "executor": "nx:run-commands",
@@ -571,7 +649,9 @@
         "parallel": false
       },
       "inputs": [
-        { "env": "BUILD_TEST_INTERNAL_PACKAGE" },
+        {
+          "env": "BUILD_TEST_INTERNAL_PACKAGE"
+        },
         "default",
         "test"
       ],
@@ -581,7 +661,6 @@
         "{projectRoot}/js/__internal/core/localization/cldr-data",
         "{projectRoot}/js/__internal/core/localization/default_messages.ts"
       ],
-      "cache": true,
       "configurations": {
         "testing": {
           "env": {
@@ -596,15 +675,16 @@
         "script": "build-dist"
       },
       "inputs": [
-        { "env": "BUILD_TEST_INTERNAL_PACKAGE" },
+        {
+          "env": "BUILD_TEST_INTERNAL_PACKAGE"
+        },
         "default",
         "test"
       ],
       "outputs": [
         "{projectRoot}/artifacts",
         "{projectRoot}/scss/bundles"
-      ],
-      "cache": true
+      ]
     },
     "build:dev": {
       "executor": "nx:run-script",
@@ -615,10 +695,18 @@
         "^build"
       ],
       "inputs": [
-        { "env": "BUILD_TEST_INTERNAL_PACKAGE" },
-        { "env": "DEVEXTREME_TEST_CI" },
-        { "env": "DOTNET_CLI_TELEMETRY_OPTOUT" },
-        { "env": "DOTNET_SKIP_FIRST_TIME_EXPERIENCE" },
+        {
+          "env": "BUILD_TEST_INTERNAL_PACKAGE"
+        },
+        {
+          "env": "DEVEXTREME_TEST_CI"
+        },
+        {
+          "env": "DOTNET_CLI_TELEMETRY_OPTOUT"
+        },
+        {
+          "env": "DOTNET_SKIP_FIRST_TIME_EXPERIENCE"
+        },
         "default",
         "test"
       ],
@@ -627,8 +715,7 @@
         "{projectRoot}/build/bundle-templates/dx.custom.js",
         "{projectRoot}/js/__internal/core/localization/cldr-data",
         "{projectRoot}/js/__internal/core/localization/default_messages.ts"
-      ],
-      "cache": true
+      ]
     },
     "dev": {
       "executor": "nx:run-script",
@@ -646,8 +733,7 @@
       },
       "dependsOn": [
         "build:dev"
-      ],
-      "cache": true
+      ]
     },
     "lint-css": {
       "executor": "nx:run-script",
@@ -656,8 +742,7 @@
       },
       "inputs": [
         "{projectRoot}/scss/**/*"
-      ],
-      "cache": true
+      ]
     },
     "lint-dts": {
       "executor": "nx:run-script",
@@ -665,12 +750,13 @@
         "script": "lint-dts"
       },
       "inputs": [
-        { "env": "DEBUG" },
+        {
+          "env": "DEBUG"
+        },
         "{projectRoot}/**/*.d.ts",
         "{projectRoot}/.eslint*",
         "{projectRoot}/tsconfig.json"
-      ],
-      "cache": true
+      ]
     },
     "lint-js": {
       "executor": "nx:run-script",
@@ -680,8 +766,7 @@
       "inputs": [
         "{projectRoot}/**/*.js",
         "{projectRoot}/.eslint*"
-      ],
-      "cache": true
+      ]
     },
     "lint-ts": {
       "executor": "nx:run-script",
@@ -689,13 +774,14 @@
         "script": "lint-ts"
       },
       "inputs": [
-        { "env": "DEBUG" },
+        {
+          "env": "DEBUG"
+        },
         "{projectRoot}/**/*.ts?(x)",
         "{projectRoot}/.eslint*",
         "!{projectRoot}/**/*.d.ts",
         "!{projectRoot}/testing/renovation/**/*"
-      ],
-      "cache": true
+      ]
     },
     "test-jest": {
       "executor": "nx:run-script",
@@ -706,8 +792,7 @@
         "{projectRoot}/js/**/*",
         "{projectRoot}/build/**/*",
         "{projectRoot}/jest.*"
-      ],
-      "cache": true
+      ]
     },
     "test-styles": {
       "executor": "nx:run-script",
@@ -718,8 +803,7 @@
         "default",
         "!{projectRoot}/js/**/*",
         "!{projectRoot}/ts/**/*"
-      ],
-      "cache": true
+      ]
     }
   },
   "namedInputs": {
