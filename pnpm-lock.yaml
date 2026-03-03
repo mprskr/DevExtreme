@@ -1407,13 +1407,13 @@ importers:
         specifier: 3.5.0
         version: 3.5.0(axe-core@4.11.1)(testcafe@3.7.4)
       '@testing-library/dom':
-        specifier: ^10.4.0
+        specifier: 10.4.0
         version: 10.4.0
       '@testing-library/jest-dom':
-        specifier: ^6.6.3
+        specifier: 6.6.3
         version: 6.6.3
       '@testing-library/user-event':
-        specifier: ^14.5.2
+        specifier: 14.5.2
         version: 14.5.2(@testing-library/dom@10.4.0)
       '@types/enzyme':
         specifier: 3.10.19
@@ -6237,6 +6237,7 @@ packages:
 
   '@sinonjs/text-encoding@0.7.3':
     resolution: {integrity: sha512-DE427ROAphMQzU4ENbliGYrBSYPXF+TtLg9S8vzeA+OF4ZKzoDdzfL8sxuMUGS/lgRhM6j1URSk9ghf7Xo1tyA==}
+    deprecated: 'Deprecated: no longer maintained, as we are not depending on it'
 
   '@socket.io/component-emitter@3.1.2':
     resolution: {integrity: sha512-9BCxFwvbGg/RsZK9tjXd8s4UcwR0MWeFQ1XEKIQVVvAGJyINdrqKMcTRyLoK8Rse1GjzLV9cwjWV1olXRWEXVA==}
